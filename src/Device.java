@@ -5,11 +5,11 @@ public class Device {
     private DeviceStatus Status;
     private DeviceType deviceType;
 
-    public Device(int id, String deviceName, DeviceStatus Status, DeviceType deviceType) {
+    public Device(int id, String deviceName, DeviceType deviceType, DeviceStatus Status) {
         this.id = id;
         this.deviceName = deviceName;
-        this.Status = Status;
         this.deviceType = deviceType;
+        this.Status = Status;
     }
     public int getId() {
         return id;
@@ -27,8 +27,8 @@ public class Device {
     public void displayInfo() {
         System.out.println("Device ID: " + id);
         System.out.println("Device Name: " + deviceName);
-        System.out.println("Status: " + Status);
         System.out.println("Device Type: " + deviceType);
+        System.out.println("Status: " + Status);
     }
     public void changeStatus(DeviceStatus Status) {
         this.Status = Status;

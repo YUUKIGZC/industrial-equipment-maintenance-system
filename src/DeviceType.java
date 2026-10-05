@@ -4,5 +4,5 @@ public enum DeviceType {
     ROBOT,
     PLC,
     SENSOR,
-    VISON_SYSTEM
+    VISION_SYSTEM
 }

@@ -28,10 +28,13 @@ public class DatabaseConnectionTest {
             ResultSet resultSet = statement.executeQuery("select * from devices");
 
             while (resultSet.next()) {
-                System.out.println(resultSet.getInt("id"));
-                System.out.println(resultSet.getString("device_name"));
-                System.out.println(resultSet.getString("device_type"));
-                System.out.println(resultSet.getString("status"));
+                int id = resultSet.getInt("id");
+                String deviceName = resultSet.getString("device_name");
+                String deviceType = resultSet.getString("device_type");
+                String status = resultSet.getString("status");
+
+                Device device = new Device(id,deviceName,DeviceType.valueOf(deviceType),DeviceStatus.valueOf(status));
+                device.displayInfo();
             }
 
             connection.close();

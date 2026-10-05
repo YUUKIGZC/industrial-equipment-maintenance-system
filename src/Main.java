@@ -6,36 +6,38 @@ public class Main {
 
         DeviceRepository repository = new DeviceRepository();
 
-        repository.save(new Device(1, "加工中心一号", DeviceStatus.RUNNING, DeviceType.CNC));
-        repository.save(new Device(2, "PLC控制柜一号", DeviceStatus.STOPPED, DeviceType.PLC));
-        repository.save(new Device(3, "工业机器人一号", DeviceStatus.MAINTENANCE, DeviceType.ROBOT));
-        repository.save(new Device(4, "视觉检测设备一号", DeviceStatus.ERROR, DeviceType.VISON_SYSTEM));
+        List<Device> devices = repository.findAll();
 
-        for (Device device : repository.findAll()) {
+        Device deviceTest = new Device(0, "加工中心二号", DeviceType.CNC, DeviceStatus.RUNNING);
+//        repository.save(deviceTest);
+
+
+        for (Device device : devices) {
             device.displayInfo();
             System.out.println("------------------");
         }
 
-        Device device = repository.findById(999);
+        Device device = repository.findById(3);
         if (device != null) {
+            System.out.println("找到设备：");
             device.displayInfo();
         }else {
             System.out.println("设备不存在！");
         }
-        boolean result = repository.updateStatus(4, DeviceStatus.RUNNING);
-        if (result) {
-            System.out.println("状态修改成功");
-        }else {
-
-        }
-        boolean deleted = repository.deleteById(999);
-        if (deleted) {
-            System.out.println("成功删除设备！");
-        }else {
-            System.out.println("找不到设备!");
-        }
-        for (Device device1 : repository.findAll()) {
-            device1.displayInfo();
-        }
+//        boolean result = repository.updateStatus(4, DeviceStatus.RUNNING);
+//        if (result) {
+//            System.out.println("状态修改成功");
+//        }else {
+//
+//        }
+//        boolean deleted = repository.deleteById(999);
+//        if (deleted) {
+//            System.out.println("成功删除设备！");
+//        }else {
+//            System.out.println("找不到设备!");
+//        }
+//        for (Device device1 : repository.findAll()) {
+//            device1.displayInfo();
+//        }
     }
 }
