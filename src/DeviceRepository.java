@@ -90,21 +90,44 @@ public class DeviceRepository {
         return null;
     }
     public boolean updateStatus(int id, DeviceStatus status) {
-//        for (Device device : devices) {
-//            if (device.getId() == id) {
-//                device.changeStatus(status);
-//                return true;
-//            }
-//        }
+        String sql = """
+                UPDATE devices
+                SET status = ?
+                WHERE id = ?
+                """;
+        try (
+                Connection connection = DriverManager.getConnection(url, username, password);
+                PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(2, id);
+            statement.setString(1, status.name());
+
+            int rows = statement.executeUpdate();
+            System.out.println("影响行数：" + rows);
+            return rows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
     public boolean deleteById(int id) {
-//        for (Device device: devices) {
-//            if (device.getId() == id) {
-//                devices.remove(device);
-//                return true;
-//            }
-//        }
+        String sql = """
+                DELETE FROM devices
+                WHERE id = ?
+                """;
+
+        try (
+                Connection connection = DriverManager.getConnection(url, username, password);
+                PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setInt(1,id);
+            int rows = statement.executeUpdate();
+
+            return rows > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
 }

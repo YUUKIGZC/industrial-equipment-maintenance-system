@@ -8,7 +8,7 @@ public class Main {
 
         List<Device> devices = repository.findAll();
 
-        Device deviceTest = new Device(0, "加工中心二号", DeviceType.CNC, DeviceStatus.RUNNING);
+//        Device deviceTest = new Device(0, "加工中心二号", DeviceType.CNC, DeviceStatus.RUNNING);
 //        repository.save(deviceTest);
 
 
@@ -24,20 +24,10 @@ public class Main {
         }else {
             System.out.println("设备不存在！");
         }
-//        boolean result = repository.updateStatus(4, DeviceStatus.RUNNING);
-//        if (result) {
-//            System.out.println("状态修改成功");
-//        }else {
-//
-//        }
-//        boolean deleted = repository.deleteById(999);
-//        if (deleted) {
-//            System.out.println("成功删除设备！");
-//        }else {
-//            System.out.println("找不到设备!");
-//        }
-//        for (Device device1 : repository.findAll()) {
-//            device1.displayInfo();
-//        }
+        boolean updated = repository.updateStatus(999, DeviceStatus.STOPPED);
+        System.out.println(updated);
+
+        boolean deleted = repository.deleteById(5);
+        System.out.println(deleted);
     }
 }
