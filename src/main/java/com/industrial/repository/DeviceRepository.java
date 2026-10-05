@@ -1,3 +1,9 @@
+package com.industrial.repository;
+
+import com.industrial.model.Device;
+import com.industrial.model.DeviceStatus;
+import com.industrial.model.DeviceType;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

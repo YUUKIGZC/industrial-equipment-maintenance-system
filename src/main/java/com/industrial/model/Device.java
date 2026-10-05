@@ -1,3 +1,5 @@
+package com.industrial.model;
+
 public class Device {
 
     private int id;

@@ -1,3 +1,9 @@
+package com.industrial;
+
+import com.industrial.model.Device;
+import com.industrial.model.DeviceStatus;
+import com.industrial.model.DeviceType;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -33,7 +39,7 @@ public class DatabaseConnectionTest {
                 String deviceType = resultSet.getString("device_type");
                 String status = resultSet.getString("status");
 
-                Device device = new Device(id,deviceName,DeviceType.valueOf(deviceType),DeviceStatus.valueOf(status));
+                Device device = new Device(id,deviceName, DeviceType.valueOf(deviceType), DeviceStatus.valueOf(status));
                 device.displayInfo();
             }
 

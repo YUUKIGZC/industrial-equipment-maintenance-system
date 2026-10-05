@@ -1,4 +1,9 @@
-import java.util.ArrayList;
+package com.industrial;
+
+import com.industrial.model.Device;
+import com.industrial.model.DeviceStatus;
+import com.industrial.repository.DeviceRepository;
+
 import java.util.List;
 
 public class Main {
@@ -8,7 +13,7 @@ public class Main {
 
         List<Device> devices = repository.findAll();
 
-//        Device deviceTest = new Device(0, "加工中心二号", DeviceType.CNC, DeviceStatus.RUNNING);
+//        com.industrial.model.Device deviceTest = new com.industrial.model.Device(0, "加工中心二号", com.industrial.model.DeviceType.CNC, com.industrial.model.DeviceStatus.RUNNING);
 //        repository.save(deviceTest);
 
 
