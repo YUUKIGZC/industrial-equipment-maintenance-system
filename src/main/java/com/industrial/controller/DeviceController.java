@@ -18,20 +18,24 @@ public class DeviceController {
         this.deviceService = deviceService;
     }
 
-    //@GetMapping: 当有人使用GET请求访问“/devices”时，执行以下方法
-    @GetMapping("/devices")
-    public List<Device> getDevices() {
-        return deviceService.getDevices();
-    }
     //@RequestBody: 把 HTTP 请求体（body）里面的 JSON 字符串，自动转成 Java 对象。
     @PostMapping("/devices")
     public Device createDevice(@RequestBody Device device) {
         return deviceService.createDevice(device);
     }
+    //@GetMapping: 当有人使用GET请求访问“/devices”时，执行以下方法
+    @GetMapping("/devices")
+    public List<Device> getDevices() {
+        return deviceService.getDevices();
+    }
     //@PathVariable: 获取路径变量，取值于URL路径{}占位符,@RequestParam： 获取查询参数，即？后参数
     @PutMapping("/devices/{id}/status")
     public boolean updateStatus(@PathVariable int id, @RequestParam DeviceStatus status){
         return deviceService.updateStatus(id, status);
+    }
+    @DeleteMapping("/devices/{id}")
+    public boolean deleteDevice(@PathVariable int id){
+        return deviceService.deleteDevice(id);
     }
 
 }

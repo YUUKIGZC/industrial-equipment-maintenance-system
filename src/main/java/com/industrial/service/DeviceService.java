@@ -26,4 +26,7 @@ public class DeviceService {
         deviceRepository.save(device);
         return device;
     }
+    public boolean deleteDevice(int id) {
+        return deviceRepository.deleteById(id);
+    }
 }
