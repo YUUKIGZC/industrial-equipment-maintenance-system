@@ -4,6 +4,7 @@ import com.industrial.model.Device;
 import com.industrial.model.DeviceStatus;
 import com.industrial.repository.DeviceRepository;
 import com.industrial.service.DeviceService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,14 +29,34 @@ public class DeviceController {
     public List<Device> getDevices() {
         return deviceService.getDevices();
     }
+    //@ResponseEntity
+    @GetMapping("/devices/{id}")
+    public ResponseEntity<Device> getDeviceById(@PathVariable int id) {
+        Device device = deviceService.getDeviceById(id);
+
+        if (device == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(device);
+    }
     //@PathVariable: 获取路径变量，取值于URL路径{}占位符,@RequestParam： 获取查询参数，即？后参数
     @PutMapping("/devices/{id}/status")
-    public boolean updateStatus(@PathVariable int id, @RequestParam DeviceStatus status){
-        return deviceService.updateStatus(id, status);
+    public ResponseEntity<Void> updateStatus(@PathVariable int id, @RequestParam DeviceStatus status){
+        boolean updated = deviceService.updateStatus(id, status);
+
+        if (!updated) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().build();
     }
     @DeleteMapping("/devices/{id}")
-    public boolean deleteDevice(@PathVariable int id){
-        return deviceService.deleteDevice(id);
+    public ResponseEntity<Void> deleteDevice(@PathVariable int id){
+        boolean deleted = deviceService.deleteDevice(id);
+
+        if (!deleted) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().build();
     }
 
 }

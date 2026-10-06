@@ -19,6 +19,9 @@ public class DeviceService {
     public List<Device> getDevices() {
         return deviceRepository.findAll();
     }
+    public Device getDeviceById(int id) {
+        return deviceRepository.findById(id);
+    }
     public boolean updateStatus(int id, DeviceStatus status) {
         return deviceRepository.updateStatus(id, status);
     }
