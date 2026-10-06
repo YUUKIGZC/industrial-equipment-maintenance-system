@@ -30,15 +30,21 @@ public class DeviceRepository {
         try (
                 Connection connection = DriverManager.getConnection(url, username, password);
 
-                PreparedStatement statment = connection.prepareStatement(sql);
+                PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ) {
-            statment.setString(1, device.getDeviceName());
-            statment.setString(2,device.getDeviceType().name());
-            statment.setString(3,device.getStatus().name());
+            statement.setString(1, device.getDeviceName());
+            statement.setString(2,device.getDeviceType().name());
+            statement.setString(3,device.getStatus().name());
 
-            int rows = statment.executeUpdate();
+            statement.executeUpdate();
 
-            System.out.println("插入成功，影响行数" + rows);
+            ResultSet resultSet = statement.getGeneratedKeys();
+
+            if (resultSet.next()) {
+                int generatedId = resultSet.getInt(1);
+                device.setId(generatedId);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -22,4 +22,8 @@ public class DeviceService {
     public boolean updateStatus(int id, DeviceStatus status) {
         return deviceRepository.updateStatus(id, status);
     }
+    public Device createDevice(Device device) {
+        deviceRepository.save(device);
+        return device;
+    }
 }

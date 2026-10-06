@@ -16,14 +16,26 @@ public class Device {
     public int getId() {
         return id;
     }
+    public void setId(int id) {
+        this.id = id;
+    }
     public String  getDeviceName() {
         return deviceName;
+    }
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
     }
     public DeviceStatus getStatus() {
         return Status;
     }
+    public void setStatus(DeviceStatus status) {
+        this.Status = status;
+    }
     public DeviceType getDeviceType() {
         return deviceType;
+    }
+    public void setDeviceType(DeviceType deviceType) {
+        this.deviceType = deviceType;
     }
 
     public void displayInfo() {

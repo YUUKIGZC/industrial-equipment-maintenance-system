@@ -23,6 +23,11 @@ public class DeviceController {
     public List<Device> getDevices() {
         return deviceService.getDevices();
     }
+    //@RequestBody: 把 HTTP 请求体（body）里面的 JSON 字符串，自动转成 Java 对象。
+    @PostMapping("/devices")
+    public Device createDevice(@RequestBody Device device) {
+        return deviceService.createDevice(device);
+    }
     //@PathVariable: 获取路径变量，取值于URL路径{}占位符,@RequestParam： 获取查询参数，即？后参数
     @PutMapping("/devices/{id}/status")
     public boolean updateStatus(@PathVariable int id, @RequestParam DeviceStatus status){
