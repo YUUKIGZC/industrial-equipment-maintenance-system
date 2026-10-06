@@ -3,12 +3,14 @@ package com.industrial.repository;
 import com.industrial.model.Device;
 import com.industrial.model.DeviceStatus;
 import com.industrial.model.DeviceType;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//@Repository: 声明Repository类，托管给Spring
+@Repository
 public class DeviceRepository {
 
     private final String url = "jdbc:mysql://localhost:3306/industrial_equipment";
