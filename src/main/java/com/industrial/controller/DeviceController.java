@@ -21,8 +21,13 @@ public class DeviceController {
 
     //@RequestBody: 把 HTTP 请求体（body）里面的 JSON 字符串，自动转成 Java 对象。
     @PostMapping("/devices")
-    public Device createDevice(@RequestBody Device device) {
-        return deviceService.createDevice(device);
+    public ResponseEntity<Device> createDevice(@RequestBody Device device) {
+
+        Device createdDevice = deviceService.createDevice(device);
+
+        return ResponseEntity
+                .status(201)q
+                .body(createdDevice);
     }
     //@GetMapping: 当有人使用GET请求访问“/devices”时，执行以下方法
     @GetMapping("/devices")
@@ -31,31 +36,29 @@ public class DeviceController {
     }
     //@ResponseEntity
     @GetMapping("/devices/{id}")
-    public ResponseEntity<Device> getDeviceById(@PathVariable int id) {
-        Device device = deviceService.getDeviceById(id);
-
-        if (device == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(device);
+    public Device getDeviceById(@PathVariable int id) {
+        return deviceService.getDeviceById(id);
     }
+//    public ResponseEntity<Device> getDeviceById(@PathVariable int id) {
+//        Device device = deviceService.getDeviceById(id);
+//
+//        if (device == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        return ResponseEntity.ok(device);
+//    }
     //@PathVariable: 获取路径变量，取值于URL路径{}占位符,@RequestParam： 获取查询参数，即？后参数
     @PutMapping("/devices/{id}/status")
     public ResponseEntity<Void> updateStatus(@PathVariable int id, @RequestParam DeviceStatus status){
-        boolean updated = deviceService.updateStatus(id, status);
 
-        if (!updated) {
-            return ResponseEntity.notFound().build();
-        }
+        deviceService.updateStatus(id, status);
+
         return ResponseEntity.ok().build();
     }
     @DeleteMapping("/devices/{id}")
     public ResponseEntity<Void> deleteDevice(@PathVariable int id){
-        boolean deleted = deviceService.deleteDevice(id);
 
-        if (!deleted) {
-            return ResponseEntity.notFound().build();
-        }
+        deviceService.deleteDevice(id);
         return ResponseEntity.ok().build();
     }
 
