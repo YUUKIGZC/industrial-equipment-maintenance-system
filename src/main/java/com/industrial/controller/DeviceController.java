@@ -26,7 +26,7 @@ public class DeviceController {
         Device createdDevice = deviceService.createDevice(device);
 
         return ResponseEntity
-                .status(201)q
+                .status(201)
                 .body(createdDevice);
     }
     //@GetMapping: 当有人使用GET请求访问“/devices”时，执行以下方法

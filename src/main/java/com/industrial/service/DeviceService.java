@@ -34,6 +34,12 @@ public class DeviceService {
     }
     public boolean updateStatus(int id, DeviceStatus status) {
 
+        Device device = getDeviceById(id);
+
+        if (device.getStatus() == status) {
+            return true;
+        }
+
         boolean updated = deviceRepository.updateStatus(id, status);
 
         if (!updated) {

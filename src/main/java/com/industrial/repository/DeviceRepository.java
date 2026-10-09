@@ -1,5 +1,6 @@
 package com.industrial.repository;
 
+import com.industrial.exception.DatabaseAccessException;
 import com.industrial.model.Device;
 import com.industrial.model.DeviceStatus;
 import com.industrial.model.DeviceType;
@@ -33,8 +34,8 @@ public class DeviceRepository {
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ) {
             statement.setString(1, device.getDeviceName());
-            statement.setString(2,device.getDeviceType().name());
-            statement.setString(3,device.getStatus().name());
+            statement.setString(2, device.getDeviceType().name());
+            statement.setString(3, device.getStatus().name());
 
             statement.executeUpdate();
 
@@ -45,8 +46,8 @@ public class DeviceRepository {
                 device.setId(generatedId);
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new DatabaseAccessException("创建设备失败", e);
         }
     }
 //  SELECT
@@ -86,7 +87,7 @@ public class DeviceRepository {
         try (
                 Connection connection = DriverManager.getConnection(url, username, password);
                 PreparedStatement statement = connection.prepareStatement(sql)
-        ){
+        ) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -98,8 +99,8 @@ public class DeviceRepository {
                 Device device = new Device(deviceId, deviceName, DeviceType.valueOf(deviceType), DeviceStatus.valueOf(status));
                 return device;
             }
-        } catch (Exception e){
-            e.printStackTrace();
+        } catch (SQLException e){
+            throw new DatabaseAccessException("查询设备失败", e);
         }
         return null;
     }
@@ -139,9 +140,8 @@ public class DeviceRepository {
             int rows = statement.executeUpdate();
 
             return rows > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new DatabaseAccessException("删除设备失败", e);
         }
-        return false;
     }
 }
