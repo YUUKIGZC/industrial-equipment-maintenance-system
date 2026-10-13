@@ -1,6 +1,7 @@
 package com.industrial.service;
 
 import com.industrial.exception.DeviceNotFoundException;
+import com.industrial.exception.InvalidDeviceException;
 import com.industrial.model.Device;
 import com.industrial.model.DeviceStatus;
 import com.industrial.repository.DeviceRepository;
@@ -18,6 +19,17 @@ public class DeviceService {
     }
 
     public Device createDevice(Device device) {
+        if (device.getDeviceName() == null || device.getDeviceName().isBlank()) {
+            throw new InvalidDeviceException("设备名称不能为空");
+        }
+        if (device.getDeviceType() == null) {
+            throw new InvalidDeviceException("设备类型不为空");
+        }
+        if (device.getStatus() == null) {
+            throw new InvalidDeviceException("设备状态不为空");
+        }
+
+
         deviceRepository.save(device);
         return device;
     }

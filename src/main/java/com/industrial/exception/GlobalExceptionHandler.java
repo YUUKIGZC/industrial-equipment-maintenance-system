@@ -15,6 +15,10 @@ public class GlobalExceptionHandler {
     //@ExceptionHandler:
     @ExceptionHandler(DatabaseAccessException.class)
     public ResponseEntity<String> handleDatabaseAccess(DatabaseAccessException e) {
-        return ResponseEntity.status(500).body("数据库访问失败，请稍后重试");
+        return ResponseEntity.status(500).body(e.getMessage());
+    }
+    @ExceptionHandler(InvalidDeviceException.class)
+    public ResponseEntity<String> handleInvalidDevice(InvalidDeviceException e) {
+        return ResponseEntity.status(400).body(e.getMessage());
     }
 }
