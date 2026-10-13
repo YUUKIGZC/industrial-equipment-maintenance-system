@@ -75,8 +75,8 @@ public class DeviceRepository {
 
                 devices.add(device);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new DatabaseAccessException("查询设备列表失败", e);
         }
         return devices;
     }
@@ -120,11 +120,9 @@ public class DeviceRepository {
             int rows = statement.executeUpdate();
             System.out.println("影响行数：" + rows);
             return rows > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new DatabaseAccessException("更新设备状态失败",e);
         }
-
-        return false;
     }
     public boolean deleteById(int id) {
         String sql = """
